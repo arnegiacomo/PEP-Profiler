@@ -1,36 +1,69 @@
 package no.arnemunthekaas.service;
 
-import okhttp3.MediaType;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import no.arnemunthekaas.util.Config;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+import java.io.IOException;
+import java.sql.Timestamp;
+import java.time.Instant;
 
 public class RestClient {
 
+    // Static access
+    public static RestClient restClient;
+
     public RestClient() {
-        // TODO Auto-generated constructor stub
+        restClient = this;
     }
 
-    private static String pepPath = "https://code-challenge.stacc.dev/api/pep";
-    private static String wikiPath = "https://en.wikipedia.org/w/api.php";
-    public static final MediaType JSON = MediaType.parse("application/json; charset=UTF-8");
 
-    public void pepSearch(SearchType searchType, String input) {
+    public String pepSearch(SearchType searchType, String input) {
+        String result = "";
 
-
+        switch (searchType) {
+            case NAME -> result = searchName(input);
+            case ADDRESS -> result = searchAddress(input);
+            case PHONE -> result = searchPhone(input);
+            case EMAIL -> result = searchEmail(input);
+        }
+        
+        return result;
     }
 
-    private void nameSearch(String name) {
-
+    private String searchName(String name) {
+        return doPepSearch("?q=" + name + "&limit=1");
     }
 
-    private void addressSearch(String name) {
-
+    private String searchAddress(String address) {
+        return doPepSearch("?q=" + address + "&limit=1");
     }
 
-    private void emailSearch(String name) {
-
+    private String searchEmail(String email) {
+        return doPepSearch("?q=" + email + "&limit=1");
     }
 
-    private void phoneSearch(String name) {
+    private String searchPhone(String phone) {
+        return doPepSearch("?q=" + phone + "&limit=1");
+    }
 
+    private String doPepSearch(String query) {
+        OkHttpClient client = new OkHttpClient();
+        String result = "";
+
+        Request request = new Request.Builder().url(Config.pepPath + query).get().build();
+
+        System.out.println(request.toString() + " " + Timestamp.from(Instant.now()) );
+        try(Response response = client.newCall(request).execute()){
+            result = response.body().string();
+        } catch(JsonSyntaxException | IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println(result);
+        return result;
     }
 }
 
