@@ -13,6 +13,13 @@ import java.time.Instant;
 
 public class RestClient {
 
+    public enum SearchType {
+        NAME,
+        ADDRESS,
+        EMAIL,
+        PHONE
+    }
+
     // Static access
     public static RestClient restClient;
 
