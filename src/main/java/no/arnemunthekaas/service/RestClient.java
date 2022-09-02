@@ -1,7 +1,7 @@
 package no.arnemunthekaas.service;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
+import com.google.gson.*;
+import no.arnemunthekaas.model.Pep;
 import no.arnemunthekaas.util.Config;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -10,6 +10,9 @@ import okhttp3.Response;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class RestClient {
 
@@ -17,6 +20,7 @@ public class RestClient {
         NAME,
         ADDRESS,
         EMAIL,
+        COUNTRY,
         PHONE
     }
 
@@ -28,48 +32,119 @@ public class RestClient {
     }
 
 
-    public String pepSearch(SearchType searchType, String input) {
-        String result = "";
+    public List<Pep> pepSearch(SearchType searchType, String input) {
+        List<Pep> results = new ArrayList<>();
 
         switch (searchType) {
-            case NAME -> result = searchName(input);
-            case ADDRESS -> result = searchAddress(input);
-            case PHONE -> result = searchPhone(input);
-            case EMAIL -> result = searchEmail(input);
+            case NAME -> results = searchName(input);
+            case ADDRESS -> results = searchAddress(input);
+            case PHONE -> results = searchPhone(input);
+            case EMAIL -> results = searchEmail(input);
+            case COUNTRY -> results = searchCountry(input);
         }
         
-        return result;
+        return results;
     }
 
-    private String searchName(String name) {
-        return doPepSearch("?q=" + name + "&limit=1");
+    // Haha alle disse er helt like, det er litt krise, men har muligheten til å tilpasse
+    private List<Pep> searchCountry(String country) {
+        return doPepSearch(country);
     }
 
-    private String searchAddress(String address) {
-        return doPepSearch("?q=" + address + "&limit=1");
+    private List<Pep> searchName(String name) {
+        return doPepSearch(name);
     }
 
-    private String searchEmail(String email) {
-        return doPepSearch("?q=" + email + "&limit=1");
+    private List<Pep> searchAddress(String address) {
+        return doPepSearch(address);
     }
 
-    private String searchPhone(String phone) {
-        return doPepSearch("?q=" + phone + "&limit=1");
+    private List<Pep> searchEmail(String email) {
+        return doPepSearch( email);
     }
 
-    private String doPepSearch(String query) {
+    private List<Pep> searchPhone(String phone) {
+        return doPepSearch(phone);
+    }
+
+    public List<Pep> doPepSearch(String query) {
         OkHttpClient client = new OkHttpClient();
-        String result = "";
+
+        List<JsonObject> resultList = new ArrayList<>();
 
         Request request = new Request.Builder().url(Config.pepPath + query).get().build();
 
         System.out.println(request.toString() + " " + Timestamp.from(Instant.now()) );
         try(Response response = client.newCall(request).execute()){
-            result = response.body().string();
+            String body = response.body().string();
+            JsonObject results = JsonParser.parseString(body).getAsJsonObject();
+            int amount = results.getAsJsonObject("total").get("value").getAsInt();
+
+            for (int i = 0; i < amount; i++) {
+                JsonObject obj = results.getAsJsonArray("results").get(i).getAsJsonObject();
+                resultList.add(obj);
+            }
+
         } catch(JsonSyntaxException | IOException e) {
             e.printStackTrace();
         }
-        System.out.println(result);
+
+        List<Pep> peps = new ArrayList<>();
+
+        resultList.forEach(o -> peps.add(new Pep(o)));
+        return peps;
+    }
+
+    public String wikiSummarySearch(String title) {
+        String result = "";
+
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder().url(Config.wikiSummaryPath + title).get().build();
+        try(Response response = client.newCall(request).execute()) {
+            String body = response.body().string();
+            System.out.println(body);
+            JsonObject jsonObject = JsonParser.parseString(body).getAsJsonObject();
+            jsonObject = jsonObject.getAsJsonObject("query").getAsJsonObject("pages");
+            Iterator<String> keys = jsonObject.keySet().iterator();
+
+            String key = null;
+            if (keys.hasNext()) {
+                key = keys.next();
+            }
+            result = jsonObject.getAsJsonObject(key).get("extract").getAsString();
+
+
+        } catch(JsonSyntaxException | IOException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public String wikiImageSearch(String title) {
+        String result = "";
+
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder().url(Config.wikiImagePath + title).get().build();
+        try(Response response = client.newCall(request).execute()) {
+            String body = response.body().string();
+            System.out.println(body);
+            JsonObject jsonObject = JsonParser.parseString(body).getAsJsonObject();
+            jsonObject = jsonObject.getAsJsonObject("query").getAsJsonObject("pages");
+            Iterator<String> keys = jsonObject.keySet().iterator();
+
+            String key = null;
+            if (keys.hasNext()) {
+                key = keys.next();
+            }
+            result = jsonObject.getAsJsonObject(key).getAsJsonObject("original")
+                    .get("source").getAsString();
+
+
+        } catch(JsonSyntaxException | IOException e) {
+            e.printStackTrace();
+        }
+
         return result;
     }
 }

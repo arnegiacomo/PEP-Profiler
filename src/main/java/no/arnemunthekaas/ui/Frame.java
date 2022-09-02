@@ -1,5 +1,6 @@
 package no.arnemunthekaas.ui;
 
+import com.google.gson.JsonObject;
 import no.arnemunthekaas.model.Pep;
 import no.arnemunthekaas.service.RestClient;
 
@@ -13,8 +14,8 @@ public class Frame extends javax.swing.JFrame {
 
     // Static access
     public static Frame frame;
-    private int width = 1280;
-    private int height = 720;
+    private static int defaultWidth = 1280;
+    private static int defaultHeight = 720;
     private int minWidth = 250;
     private int minHeight = 250;
 
@@ -26,15 +27,19 @@ public class Frame extends javax.swing.JFrame {
         this.setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        centerFrame();
         createMenuTab();
 
         List<Pep> test = new ArrayList<Pep>();
-        test.add(new Pep());
+        Pep pep = new Pep(new JsonObject());
+        pep.name = "Erna Solberg";
+        test.add(pep);
+
+        this.jPanel = new Panel(Panel.PanelType.PROFILEVIEW, test);
         this.add(new Panel(Panel.PanelType.PROFILEVIEW, test));
 
-        this.setSize(width, height);
+        this.setSize(defaultWidth, defaultHeight);
         frame.setMinimumSize(new Dimension(minWidth, minHeight));
+        centerFrame();
     }
 
     private void createMenuTab() {
@@ -44,8 +49,8 @@ public class Frame extends javax.swing.JFrame {
         JMenu menuSearch = new JMenu("Search");
         menuSearch.add(new JMenuItem(new AbstractAction("Name") {
             public void actionPerformed(ActionEvent e) {
-                RestClient.restClient.pepSearch(RestClient.SearchType.NAME, JOptionPane.showInputDialog("Search by name:"));
-                // TODO
+                List<Pep> peps = RestClient.restClient.pepSearch(RestClient.SearchType.NAME, JOptionPane.showInputDialog("Search by name:"));
+                frame.changePanel(new Panel(Panel.PanelType.RESULTS, peps));
             }
         }));
 
@@ -64,6 +69,12 @@ public class Frame extends javax.swing.JFrame {
         menuSearch.add(new JMenuItem(new AbstractAction("Phone") {
             public void actionPerformed(ActionEvent e) {
                 RestClient.restClient.pepSearch(RestClient.SearchType.PHONE, JOptionPane.showInputDialog("Search by phone:"));
+                // TODO
+            }
+        }));
+        menuSearch.add(new JMenuItem(new AbstractAction("Country") {
+            public void actionPerformed(ActionEvent e) {
+                RestClient.restClient.pepSearch(RestClient.SearchType.COUNTRY, JOptionPane.showInputDialog("Search by country abbreviation:"));
                 // TODO
             }
         }));
@@ -93,7 +104,25 @@ public class Frame extends javax.swing.JFrame {
         this.setJMenuBar(menuBar);
     }
 
+    private void changePanel(Panel newPanel) {
+        frame.remove(jPanel);
+        Panel panel = newPanel;
+        frame.add(panel);
+        frame.jPanel = panel;
+
+        frame.invalidate();
+        frame.validate();
+    }
+
     private void centerFrame() {
-        this.setLocation((Toolkit.getDefaultToolkit().getScreenSize().width - width) / 2 , (Toolkit.getDefaultToolkit().getScreenSize().height - height) / 2 );
+        this.setLocation((Toolkit.getDefaultToolkit().getScreenSize().width - this.getWidth()) / 2 , (Toolkit.getDefaultToolkit().getScreenSize().height - this.getHeight()) / 2 );
+    }
+
+    public static int getDefaultWidth() {
+        return defaultWidth;
+    }
+
+    public static int getDefaultHeight() {
+        return defaultHeight;
     }
 }

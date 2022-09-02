@@ -7,8 +7,8 @@ public class Main{
 
     public static void main(String[] args) {
 
-        Frame frame = new Frame();
         RestClient restClient = new RestClient();
+        Frame frame = new Frame();
 
     }
 }

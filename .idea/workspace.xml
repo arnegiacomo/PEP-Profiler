@@ -5,13 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="71bf3a03-a0af-475f-a6c0-653445970da8" name="Changes" comment=".">
-      <change afterPath="$PROJECT_DIR$/src/main/java/no/arnemunthekaas/ui/Panel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/RestClientTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/no/arnemunthekaas/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/no/arnemunthekaas/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/no/arnemunthekaas/model/Pep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/no/arnemunthekaas/model/Pep.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/no/arnemunthekaas/model/Profile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/no/arnemunthekaas/model/Profile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/no/arnemunthekaas/service/RestClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/no/arnemunthekaas/service/RestClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/no/arnemunthekaas/service/SearchType.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/no/arnemunthekaas/ui/Frame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/no/arnemunthekaas/ui/Frame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/no/arnemunthekaas/ui/Panel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/no/arnemunthekaas/ui/Panel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/no/arnemunthekaas/util/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/no/arnemunthekaas/util/Config.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,23 +38,6 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="PEP-API" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="PEP-API" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="PEP-API" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="PEP-API" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build setup" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -96,10 +82,10 @@
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="no.arnemunthekaas.Main" />
       <module name="PEP-API.main" />
@@ -113,8 +99,80 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="RestClientTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;RestClientTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="RestClientTest.testdoPepSearch" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;RestClientTest.testdoPepSearch&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="RestClientTest.testwikiImageSearch (1)" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;RestClientTest.testwikiImageSearch&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.RestClientTest.testdoPepSearch" />
+        <item itemvalue="Gradle.RestClientTest" />
+        <item itemvalue="Gradle.RestClientTest.testwikiImageSearch (1)" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -135,7 +193,8 @@
       <workItem from="1662040270539" duration="3509000" />
       <workItem from="1662046160706" duration="104000" />
       <workItem from="1662046275348" duration="166000" />
-      <workItem from="1662046451682" duration="9862000" />
+      <workItem from="1662046451682" duration="25184000" />
+      <workItem from="1662140602847" duration="2585000" />
     </task>
     <task id="LOCAL-00001" summary=".">
       <created>1661715708014</created>
@@ -158,7 +217,14 @@
       <option name="project" value="LOCAL" />
       <updated>1662050229429</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary=".">
+      <created>1662068104368</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1662068104368</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
