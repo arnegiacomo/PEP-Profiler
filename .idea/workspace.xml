@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="71bf3a03-a0af-475f-a6c0-653445970da8" name="Changes" comment="getting somewhere">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="71bf3a03-a0af-475f-a6c0-653445970da8" name="Changes" comment="selvrefleksjon">
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -187,7 +186,7 @@
       <workItem from="1662046275348" duration="166000" />
       <workItem from="1662046451682" duration="25184000" />
       <workItem from="1662140602847" duration="10198000" />
-      <workItem from="1662152837831" duration="490000" />
+      <workItem from="1662152837831" duration="613000" />
     </task>
     <task id="LOCAL-00001" summary=".">
       <created>1661715708014</created>
@@ -231,7 +230,14 @@
       <option name="project" value="LOCAL" />
       <updated>1662152137437</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="selvrefleksjon">
+      <created>1662153346865</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1662153346865</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -253,6 +259,7 @@
     <MESSAGE value="." />
     <MESSAGE value="shit app idea" />
     <MESSAGE value="getting somewhere" />
-    <option name="LAST_COMMIT_MESSAGE" value="getting somewhere" />
+    <MESSAGE value="selvrefleksjon" />
+    <option name="LAST_COMMIT_MESSAGE" value="selvrefleksjon" />
   </component>
 </project>
