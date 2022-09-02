@@ -2,11 +2,13 @@ package no.arnemunthekaas.ui;
 
 import no.arnemunthekaas.model.Pep;
 import no.arnemunthekaas.model.Profile;
+import no.arnemunthekaas.service.RestClient;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
@@ -48,7 +50,13 @@ public class Panel extends JPanel {
     }
 
     private void addResultButton(Pep pep) {
-        JButton button = new JButton (pep.toString());
+        JButton button = new JButton (new AbstractAction(pep.toString()) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Frame.frame.profilePanel(pep);
+            }
+        });
+
         this.add (button);
     }
 

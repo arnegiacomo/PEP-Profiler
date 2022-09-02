@@ -3,6 +3,7 @@ package no.arnemunthekaas.ui;
 import com.google.gson.JsonObject;
 import no.arnemunthekaas.model.Pep;
 import no.arnemunthekaas.service.RestClient;
+import org.apache.commons.text.WordUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,13 +30,12 @@ public class Frame extends javax.swing.JFrame {
 
         createMenuTab();
 
-        List<Pep> test = new ArrayList<Pep>();
-        Pep pep = new Pep(new JsonObject());
-        pep.name = "Erna Solberg";
+        /*List<Pep> test = new ArrayList<Pep>();
+        Pep pep = RestClient.restClient.pepSearch(RestClient.SearchType.NAME, "Erna Solberg").get(0);
         test.add(pep);
 
         this.jPanel = new Panel(Panel.PanelType.PROFILEVIEW, test);
-        this.add(new Panel(Panel.PanelType.PROFILEVIEW, test));
+        this.add(new Panel(Panel.PanelType.PROFILEVIEW, test));*/
 
         this.setSize(defaultWidth, defaultHeight);
         frame.setMinimumSize(new Dimension(minWidth, minHeight));
@@ -49,7 +49,7 @@ public class Frame extends javax.swing.JFrame {
         JMenu menuSearch = new JMenu("Search");
         menuSearch.add(new JMenuItem(new AbstractAction("Name") {
             public void actionPerformed(ActionEvent e) {
-                List<Pep> peps = RestClient.restClient.pepSearch(RestClient.SearchType.NAME, JOptionPane.showInputDialog("Search by name:"));
+                List<Pep> peps = RestClient.restClient.pepSearch(RestClient.SearchType.NAME, WordUtils.capitalizeFully(JOptionPane.showInputDialog("Search by name:")));
                 frame.changePanel(new Panel(Panel.PanelType.RESULTS, peps));
             }
         }));
@@ -105,13 +105,22 @@ public class Frame extends javax.swing.JFrame {
     }
 
     private void changePanel(Panel newPanel) {
-        frame.remove(jPanel);
+        if(jPanel != null) {
+            jPanel.invalidate();
+            frame.remove(jPanel);
+        }
         Panel panel = newPanel;
         frame.add(panel);
         frame.jPanel = panel;
 
         frame.invalidate();
         frame.validate();
+    }
+
+    public void profilePanel(Pep pep) {
+        ArrayList<Pep> peps = new ArrayList<Pep>();
+        peps.add(pep);
+        changePanel(new Panel(Panel.PanelType.PROFILEVIEW, peps));
     }
 
     private void centerFrame() {
