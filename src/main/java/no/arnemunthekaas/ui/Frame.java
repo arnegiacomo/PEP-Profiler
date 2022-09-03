@@ -22,6 +22,7 @@ public class Frame extends javax.swing.JFrame {
 
 
     private JPanel jPanel;
+    private JScrollPane jScrollPane;
     public Frame() {
         super("Pep-Profiler");
         frame = this;
@@ -31,7 +32,7 @@ public class Frame extends javax.swing.JFrame {
         createMenuTab();
 
         this.setSize(defaultWidth, defaultHeight);
-        // this.setResizable(false);
+        this.setResizable(false);
         frame.setMinimumSize(new Dimension(minWidth, minHeight));
         centerFrame();
     }
@@ -58,9 +59,21 @@ public class Frame extends javax.swing.JFrame {
             jPanel.invalidate();
             frame.remove(jPanel);
         }
+
+        if(jScrollPane != null) {
+            jScrollPane.invalidate();
+            frame.getContentPane().remove(jScrollPane);
+        }
+
         Panel panel = newPanel;
         frame.add(panel);
         frame.jPanel = panel;
+
+        JScrollPane jsp = new JScrollPane(panel);
+        jsp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        jsp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        frame.getContentPane().add(jsp);
+        frame.jScrollPane = jsp;
 
         frame.invalidate();
         frame.validate();

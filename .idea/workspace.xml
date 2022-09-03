@@ -4,15 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="71bf3a03-a0af-475f-a6c0-653445970da8" name="Changes" comment=".">
+    <list default="true" id="71bf3a03-a0af-475f-a6c0-653445970da8" name="Changes" comment="bla bla bla">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/no/arnemunthekaas/model/Pep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/no/arnemunthekaas/model/Pep.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/no/arnemunthekaas/model/Profile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/no/arnemunthekaas/model/Profile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/no/arnemunthekaas/service/RestClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/no/arnemunthekaas/service/RestClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/no/arnemunthekaas/ui/Frame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/no/arnemunthekaas/ui/Frame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/no/arnemunthekaas/ui/Panel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/no/arnemunthekaas/ui/Panel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/no/arnemunthekaas/util/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/no/arnemunthekaas/util/Config.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -193,7 +191,7 @@
       <workItem from="1662046275348" duration="166000" />
       <workItem from="1662046451682" duration="25184000" />
       <workItem from="1662140602847" duration="10198000" />
-      <workItem from="1662152837831" duration="6689000" />
+      <workItem from="1662152837831" duration="9963000" />
     </task>
     <task id="LOCAL-00001" summary=".">
       <created>1661715708014</created>
@@ -258,7 +256,14 @@
       <option name="project" value="LOCAL" />
       <updated>1662153546566</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="bla bla bla">
+      <created>1662206935912</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1662206935912</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -281,6 +286,7 @@
     <MESSAGE value="getting somewhere" />
     <MESSAGE value="selvrefleksjon" />
     <MESSAGE value="." />
-    <option name="LAST_COMMIT_MESSAGE" value="." />
+    <MESSAGE value="bla bla bla" />
+    <option name="LAST_COMMIT_MESSAGE" value="bla bla bla" />
   </component>
 </project>

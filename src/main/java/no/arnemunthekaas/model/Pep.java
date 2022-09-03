@@ -59,17 +59,17 @@ public class Pep {
     }
 
     public String toSexyPepString() {
-        String str = "<html>" + "<p>";
-        str += "ID: " + id + "<br>";
-        str += "Dataset: " + dataset + "<br>";
-        str += "Schema: " + schema + "<br>";
-        str += "Name: " + name + "<br>";
-        str += "Position: " + position + "<br>";
-        str += "Birth Date: " + birthDate + "<br>";
-        str += "Country: " + country + "<br>";
-        str += "Last Seen: " + last_seen + "<br>";
-        str += "First Seen: " + first_seen + "<br>";
-        return str + "</p>" + "</html>";
+        String str = "";
+        str += "ID: " + id + "\n" + "\n";
+        str += "Dataset: " + dataset + "\n" + "\n";
+        str += "Schema: " + schema + "\n" + "\n";
+        str += "Name: " + name + "\n" + "\n";
+        str += "Position: " + position + "\n" + "\n";
+        str += "Birth Date: " + birthDate + "\n" + "\n";
+        str += "Country: " + country + "\n" + "\n";
+        str += "Last Seen: " + last_seen + "\n" + "\n";
+        str += "First Seen: " + first_seen + "\n" + "\n";
+        return str;
     }
 
     private void setId(String id) {

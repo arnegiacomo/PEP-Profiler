@@ -123,10 +123,17 @@ public class RestClient {
             if (keys.hasNext()) {
                 key = keys.next();
             }
-            result = jsonObject.getAsJsonObject(key).get("extract").getAsString();
+            JsonObject obj = jsonObject.getAsJsonObject(key);
+            if (obj != null) {
+                JsonElement element;
+                element = obj.get("extract");
+                if( element != null) {
+                    result = element.getAsString();
+                }
+            }
 
 
-        } catch(JsonSyntaxException | IOException e) {
+        } catch(Exception e) {
             e.printStackTrace();
         }
 
@@ -149,8 +156,9 @@ public class RestClient {
             if (keys.hasNext()) {
                 key = keys.next();
             }
-            result = jsonObject.getAsJsonObject(key).getAsJsonObject("original")
-                    .get("source").getAsString();
+
+            JsonObject obj = jsonObject.getAsJsonObject(key).getAsJsonObject("original");
+            if (obj != null) result = obj.get("source").getAsString();;
 
 
         } catch(Exception e) {

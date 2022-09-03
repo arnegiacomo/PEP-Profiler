@@ -41,7 +41,7 @@ public class Panel extends JPanel {
         Profile profile = new Profile(pep);
         createProfileTitle(profile.getName());
         addTextArea(profile.getPep().toSexyPepString(), BorderLayout.WEST, 250);
-        addTextArea(profile.getDescription(), BorderLayout.CENTER, 750);
+        addTextArea(profile.getDescription(), BorderLayout.CENTER, 600);
         addImageArea(profile.getImageUrl(), BorderLayout.EAST);
     }
 
@@ -92,20 +92,22 @@ public class Panel extends JPanel {
         this.add(jLabel, BorderLayout.PAGE_START);
     }
 
-
     private void addImageArea(String urlStr, String borderLayout) {
         BufferedImage image;
         Image scaledImage;
 
+        if (urlStr == "") return;
+
         try {
             URL url = new URL(urlStr);
             image = ImageIO.read(url);
-            scaledImage = image.getScaledInstance(Frame.getDefaultWidth() / 4, (int) (Frame.getDefaultHeight() / 1.5), Image.SCALE_SMOOTH);
+            int ratio = image.getHeight() / image.getWidth();
+            scaledImage = image.getScaledInstance(300, 300 * ratio + 150, Image.SCALE_SMOOTH);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        JLabel label = new JLabel(new ImageIcon(scaledImage), SwingConstants.NORTH_EAST);
+        JLabel label = new JLabel(new ImageIcon(scaledImage));
         label.setBorder(new EmptyBorder(10, 10, 10, 10));
         this.add(label, borderLayout);
     }

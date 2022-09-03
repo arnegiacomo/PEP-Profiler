@@ -27,3 +27,4 @@ stort fokus, i og med at jeg fokuserte på det rent tekniske som lå til grunne,
 - Finere GUI: GUI er vanskelig i java, hvis dette hadde vært en webapp kunne man lettere benyttet seg av GUI-rammeverk, som kan gjøre applikasjonen lettere å bruke, og mer responsiv.
 - Ekspandert funksjonalitet: Kanskje man kunne søkt på flere typer verdier, sortert resultater eller hentet relevant informasjon fra flere kilder.
 - Support for flere språk: Dette er nok en ganske stor oppgave, men hadde vært kult!
+- Polish/bugfiksing: Denne kryr av feil og skriker av å være et unpolished program, dette steget her krever dog veldig mye tid.
