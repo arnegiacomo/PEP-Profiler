@@ -2,12 +2,9 @@ package no.arnemunthekaas.ui;
 
 import no.arnemunthekaas.model.Pep;
 import no.arnemunthekaas.model.Profile;
-import no.arnemunthekaas.service.RestClient;
 
 import javax.imageio.ImageIO;
-import javax.management.remote.JMXProviderException;
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
@@ -39,10 +36,10 @@ public class Panel extends JPanel {
     private void createProfileViewPanel(Pep pep) {
         this.setLayout(new BorderLayout());
         Profile profile = new Profile(pep);
-        createProfileTitle(profile.getName());
+        createProfileTitle(profile.getName(), 2);
         addTextArea(profile.getPep().toSexyPepString(), BorderLayout.WEST, 250);
         addTextArea(profile.getDescription(), BorderLayout.CENTER, 600);
-        addImageArea(profile.getImageUrl(), BorderLayout.EAST);
+        addImageArea(profile.getImageUrl());
     }
 
     private void createResultsPanel(List<Pep> peps) {
@@ -54,12 +51,13 @@ public class Panel extends JPanel {
             return;
         }
 
-        peps.forEach(pep -> {
-            this.addResultButton(pep);
-        });
+        peps.forEach(this::addResultButton);
     }
 
     private void createHomePanel() {
+        this.setLayout(new BorderLayout());
+        createProfileTitle("PEP-Profiler", 0);
+        addTextArea("Test",BorderLayout.CENTER, Frame.getDefaultWidth() - 20);
     }
 
     private void addResultButton(Pep pep) {
@@ -70,33 +68,34 @@ public class Panel extends JPanel {
             }
         });
         button.setHorizontalAlignment(SwingConstants.LEFT);
-
+        button.setMaximumSize(new Dimension(Frame.getDefaultWidth() - 20, 150));
         this.add (button);
     }
 
     private void addTextArea(String content, String borderLayout, int width) {
         JTextArea textArea = new JTextArea(content);
-        textArea.setBorder(new EmptyBorder(10, 10, 10, 10));
+        textArea.setBorder(new EmptyBorder(15, 15, 15, 15));
         textArea.setSize(width, (int) (Frame.getDefaultHeight() / 1.5));
         textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
         textArea.setEditable(false);
         this.add(textArea, borderLayout);
     }
 
 
-    private void createProfileTitle(String name) {
+    private void createProfileTitle(String name, int thickness) {
         JLabel jLabel = new JLabel(name, SwingConstants.CENTER);
-        jLabel.setBorder(new LineBorder(Color.DARK_GRAY, 2, true));
+        jLabel.setBorder(new LineBorder(Color.DARK_GRAY, thickness, true));
         jLabel.setSize(Frame.frame.getWidth(), 50);
         jLabel.setFont (jLabel.getFont ().deriveFont (64.0f));
         this.add(jLabel, BorderLayout.PAGE_START);
     }
 
-    private void addImageArea(String urlStr, String borderLayout) {
+    private void addImageArea(String urlStr) {
         BufferedImage image;
         Image scaledImage;
 
-        if (urlStr == "") return;
+        if (urlStr.equals("")) return;
 
         try {
             URL url = new URL(urlStr);
@@ -109,7 +108,7 @@ public class Panel extends JPanel {
 
         JLabel label = new JLabel(new ImageIcon(scaledImage));
         label.setBorder(new EmptyBorder(10, 10, 10, 10));
-        this.add(label, borderLayout);
+        this.add(label, BorderLayout.EAST);
     }
 
 

@@ -1,10 +1,8 @@
 package no.arnemunthekaas.model;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import org.apache.commons.text.WordUtils;
-
-import java.util.Date;
-import java.util.List;
 
 public class Pep {
 
@@ -21,10 +19,13 @@ public class Pep {
     public Pep(JsonObject object) {
         setId(object.get("id").getAsString());
         setSchema(object.get("schema").getAsString());
-        setName(object.getAsJsonObject("properties").get("name").getAsJsonArray().get(0).getAsString());
-        setCountry(object.getAsJsonObject("properties").get("country").getAsJsonArray().get(0).getAsString().toUpperCase());
-        setPosition(object.getAsJsonObject("properties").get("position").getAsJsonArray().get(0).getAsString());
-        setBirthDate(object.getAsJsonObject("properties").get("birthDate").getAsJsonArray().get(0).getAsString());
+
+        JsonObject obj = object.getAsJsonObject("properties") ;
+
+        setName(obj);
+        setCountry(obj);
+        setPosition(obj);
+        setBirthDate(obj);
         setFirst_seen(object.get("first_seen").getAsString());
         setLast_seen(object.get("last_seen").getAsString());
         setDataset(object.get("datasets").getAsJsonArray().get(0).getAsString());
@@ -82,24 +83,40 @@ public class Pep {
             this.schema = schema;
     }
 
-    private void setName(String name)  {
-        if (name != null)
-            this.name = WordUtils.capitalizeFully(name);
+    private void setName(JsonObject obj)  {
+        JsonElement el = obj.get("name");
+        if(el != null) {
+            name = WordUtils.capitalizeFully(el.getAsJsonArray().get(0).getAsString());
+        } else {
+            name = "";
+        }
     }
 
-    private void setPosition(String position) {
-        if (position != null)
-            this.position = position;
+    private void setPosition(JsonObject obj) {
+        JsonElement el = obj.get("position");
+        if(el != null) {
+            position = el.getAsJsonArray().get(0).getAsString().toUpperCase();
+        } else {
+            position = "";
+        }
     }
 
-    private void setBirthDate(String birthDate) {
-        if (birthDate != null)
-            this.birthDate = birthDate;
+    private void setBirthDate(JsonObject obj) {
+        JsonElement el = obj.get("birthDate");
+        if(el != null) {
+            birthDate = el.getAsJsonArray().get(0).getAsString().toUpperCase();
+        } else {
+            birthDate = "";
+        }
     }
 
-    private void setCountry(String country) {
-        if (country != null)
-            this.country = country;
+    private void setCountry(JsonObject obj) {
+        JsonElement el = obj.get("country");
+        if(el != null) {
+            country = el.getAsJsonArray().get(0).getAsString().toUpperCase();
+        } else {
+            country = "";
+        }
     }
 
     private void setDataset(String dataset) {

@@ -2,8 +2,6 @@ package no.arnemunthekaas.model;
 
 import no.arnemunthekaas.service.RestClient;
 
-import java.util.ResourceBundle;
-
 public class Profile {
 
     private String name;

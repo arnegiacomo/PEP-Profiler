@@ -1,7 +1,5 @@
 package no.arnemunthekaas.util;
 
-import okhttp3.MediaType;
-
 public class Config {
 
     public static int maxResults = 25;

@@ -7,7 +7,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -97,11 +96,7 @@ public class RestClient {
         List<Pep> peps = new ArrayList<>();
 
         resultList.forEach(o -> {
-            try {
-                peps.add(new Pep(o));
-            } catch (Exception e) {
-                // TODO fix this shit
-            }
+            peps.add(new Pep(o));
         });
 
         return peps;

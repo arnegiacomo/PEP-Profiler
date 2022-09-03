@@ -1,6 +1,5 @@
 package no.arnemunthekaas.ui;
 
-import com.google.gson.JsonObject;
 import no.arnemunthekaas.model.Pep;
 import no.arnemunthekaas.service.RestClient;
 import org.apache.commons.text.WordUtils;
@@ -15,10 +14,8 @@ public class Frame extends javax.swing.JFrame {
 
     // Static access
     public static Frame frame;
-    private static int defaultWidth = 1280;
-    private static int defaultHeight = 720;
-    private int minWidth = 1000;
-    private int minHeight = 600;
+    private static final int defaultWidth = 1280;
+    private static final int defaultHeight = 720;
 
 
     private JPanel jPanel;
@@ -33,23 +30,32 @@ public class Frame extends javax.swing.JFrame {
 
         this.setSize(defaultWidth, defaultHeight);
         this.setResizable(false);
-        frame.setMinimumSize(new Dimension(minWidth, minHeight));
         centerFrame();
+
+        this.changePanel(new Panel(Panel.PanelType.HOME, null));
     }
 
     private void createMenuTab() {
         JMenuBar menuBar = new JMenuBar();
 
-        // Search
-        JMenu menuSearch = new JMenu("Search");
-        menuSearch.add(new JMenuItem(new AbstractAction("PEP-Search") {
+        menuBar.add(new JButton(new AbstractAction("Home") {
+            public void actionPerformed(ActionEvent e) {
+                frame.changePanel(new Panel(Panel.PanelType.HOME, null));
+            }
+        }));
+
+        menuBar.add(new JButton(new AbstractAction("Search") {
             public void actionPerformed(ActionEvent e) {
                 List<Pep> peps = RestClient.restClient.pepSearch(RestClient.SearchType.NAME, WordUtils.capitalizeFully(JOptionPane.showInputDialog(null, "Search for PEP:", "Search", JOptionPane.PLAIN_MESSAGE)));
                 frame.changePanel(new Panel(Panel.PanelType.RESULTS, peps));
             }
         }));
 
-        menuBar.add(menuSearch);
+        menuBar.add(new JButton(new AbstractAction("Save") {
+            public void actionPerformed(ActionEvent e) {
+                // TODO
+            }
+        }));
 
         this.setJMenuBar(menuBar);
     }
@@ -65,13 +71,12 @@ public class Frame extends javax.swing.JFrame {
             frame.getContentPane().remove(jScrollPane);
         }
 
-        Panel panel = newPanel;
-        frame.add(panel);
-        frame.jPanel = panel;
+        frame.getContentPane().add(newPanel);
+        frame.jPanel = newPanel;
 
-        JScrollPane jsp = new JScrollPane(panel);
-        jsp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        jsp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        JScrollPane jsp = new JScrollPane(newPanel);
+        jsp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        jsp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         frame.getContentPane().add(jsp);
         frame.jScrollPane = jsp;
 
@@ -80,7 +85,7 @@ public class Frame extends javax.swing.JFrame {
     }
 
     public void profilePanel(Pep pep) {
-        ArrayList<Pep> peps = new ArrayList<Pep>();
+        ArrayList<Pep> peps = new ArrayList<>();
         peps.add(pep);
         changePanel(new Panel(Panel.PanelType.PROFILEVIEW, peps));
     }
