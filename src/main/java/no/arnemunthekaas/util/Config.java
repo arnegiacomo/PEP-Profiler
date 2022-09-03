@@ -4,7 +4,7 @@ import okhttp3.MediaType;
 
 public class Config {
 
-    public static int maxResults = 10;
+    public static int maxResults = 25;
 
     // API Paths
     public static String pepPath = "https://api.opensanctions.org/search/default/?limit=" + maxResults + "&q=";

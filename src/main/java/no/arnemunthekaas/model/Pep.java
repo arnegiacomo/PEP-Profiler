@@ -22,9 +22,9 @@ public class Pep {
         setId(object.get("id").getAsString());
         setSchema(object.get("schema").getAsString());
         setName(object.getAsJsonObject("properties").get("name").getAsJsonArray().get(0).getAsString());
-        // setCountry(object.getAsJsonObject("properties").get("country").getAsJsonArray().get(0).getAsString());
-        // setPosition(object.getAsJsonObject("properties").get("position").getAsJsonArray().get(0).getAsString());
-        // setBirthDate(object.getAsJsonObject("properties").get("birthDate").getAsJsonArray().get(0).getAsString());
+        setCountry(object.getAsJsonObject("properties").get("country").getAsJsonArray().get(0).getAsString().toUpperCase());
+        setPosition(object.getAsJsonObject("properties").get("position").getAsJsonArray().get(0).getAsString());
+        setBirthDate(object.getAsJsonObject("properties").get("birthDate").getAsJsonArray().get(0).getAsString());
         setFirst_seen(object.get("first_seen").getAsString());
         setLast_seen(object.get("last_seen").getAsString());
         setDataset(object.get("datasets").getAsJsonArray().get(0).getAsString());
@@ -32,7 +32,7 @@ public class Pep {
 
     @Override
     public String toString() {
-        return "Pep{" +
+        return "{" +
                 "id='" + id + '\'' +
                 ", schema='" + schema + '\'' +
                 ", name='" + name + '\'' +
@@ -41,6 +41,35 @@ public class Pep {
                 ", country='" + country + '\'' +
                 ", dataset='" + dataset + '\'' +
                 '}';
+    }
+
+    public String toSexyButtonString() {
+        String str = "<html>" + "<p>" + name;
+        if (position != "") {
+            str += ", " + position;
+        }
+        if (country != "") {
+            str += ", " + country;
+        }
+        if (birthDate != "") {
+            str += ", " + birthDate;
+        }
+
+        return str + "<br>" + "<br>"  + toString() + "</p>" + "</html>";
+    }
+
+    public String toSexyPepString() {
+        String str = "<html>" + "<p>";
+        str += "ID: " + id + "<br>";
+        str += "Dataset: " + dataset + "<br>";
+        str += "Schema: " + schema + "<br>";
+        str += "Name: " + name + "<br>";
+        str += "Position: " + position + "<br>";
+        str += "Birth Date: " + birthDate + "<br>";
+        str += "Country: " + country + "<br>";
+        str += "Last Seen: " + last_seen + "<br>";
+        str += "First Seen: " + first_seen + "<br>";
+        return str + "</p>" + "</html>";
     }
 
     private void setId(String id) {

@@ -78,10 +78,12 @@ public class RestClient {
         try(Response response = client.newCall(request).execute()){
             String body = response.body().string();
             JsonObject results = JsonParser.parseString(body).getAsJsonObject();
-            int amount = results.get("limit").getAsInt();
+            int amount = results.getAsJsonObject("total").get("value").getAsInt();
             System.out.println(amount + " matches " + Timestamp.from(Instant.now()) );
 
             if(amount == 0) return null;
+
+            if(amount > Config.maxResults) amount = Config.maxResults;
 
             for (int i = 0; i < amount; i++) {
                 JsonObject obj = results.getAsJsonArray("results").get(i).getAsJsonObject();
@@ -94,7 +96,13 @@ public class RestClient {
 
         List<Pep> peps = new ArrayList<>();
 
-        resultList.forEach(o -> peps.add(new Pep(o)));
+        resultList.forEach(o -> {
+            try {
+                peps.add(new Pep(o));
+            } catch (Exception e) {
+                // TODO fix this shit
+            }
+        });
 
         return peps;
     }

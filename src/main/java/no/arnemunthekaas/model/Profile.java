@@ -42,8 +42,4 @@ public class Profile {
     public void setNotes(String notes) {
         this.notes = notes;
     }
-
-    public String getPepInfo() {
-        return pep.toString();
-    }
 }

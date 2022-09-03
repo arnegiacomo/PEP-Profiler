@@ -17,8 +17,8 @@ public class Frame extends javax.swing.JFrame {
     public static Frame frame;
     private static int defaultWidth = 1280;
     private static int defaultHeight = 720;
-    private int minWidth = 250;
-    private int minHeight = 250;
+    private int minWidth = 1000;
+    private int minHeight = 600;
 
 
     private JPanel jPanel;
@@ -30,14 +30,8 @@ public class Frame extends javax.swing.JFrame {
 
         createMenuTab();
 
-        /*List<Pep> test = new ArrayList<Pep>();
-        Pep pep = RestClient.restClient.pepSearch(RestClient.SearchType.NAME, "Erna Solberg").get(0);
-        test.add(pep);
-
-        this.jPanel = new Panel(Panel.PanelType.PROFILEVIEW, test);
-        this.add(new Panel(Panel.PanelType.PROFILEVIEW, test));*/
-
         this.setSize(defaultWidth, defaultHeight);
+        // this.setResizable(false);
         frame.setMinimumSize(new Dimension(minWidth, minHeight));
         centerFrame();
     }
@@ -47,59 +41,14 @@ public class Frame extends javax.swing.JFrame {
 
         // Search
         JMenu menuSearch = new JMenu("Search");
-        menuSearch.add(new JMenuItem(new AbstractAction("Name") {
+        menuSearch.add(new JMenuItem(new AbstractAction("PEP-Search") {
             public void actionPerformed(ActionEvent e) {
-                List<Pep> peps = RestClient.restClient.pepSearch(RestClient.SearchType.NAME, WordUtils.capitalizeFully(JOptionPane.showInputDialog("Search by name:")));
+                List<Pep> peps = RestClient.restClient.pepSearch(RestClient.SearchType.NAME, WordUtils.capitalizeFully(JOptionPane.showInputDialog(null, "Search for PEP:", "Search", JOptionPane.PLAIN_MESSAGE)));
                 frame.changePanel(new Panel(Panel.PanelType.RESULTS, peps));
             }
         }));
 
-        menuSearch.add(new JMenuItem(new AbstractAction("Address") {
-            public void actionPerformed(ActionEvent e) {
-                RestClient.restClient.pepSearch(RestClient.SearchType.ADDRESS, JOptionPane.showInputDialog("Search by address:"));
-                // TODO
-            }
-        }));
-        menuSearch.add(new JMenuItem(new AbstractAction("Email") {
-            public void actionPerformed(ActionEvent e) {
-                RestClient.restClient.pepSearch(RestClient.SearchType.EMAIL, JOptionPane.showInputDialog("Search by email:"));
-                // TODO
-            }
-        }));
-        menuSearch.add(new JMenuItem(new AbstractAction("Phone") {
-            public void actionPerformed(ActionEvent e) {
-                RestClient.restClient.pepSearch(RestClient.SearchType.PHONE, JOptionPane.showInputDialog("Search by phone:"));
-                // TODO
-            }
-        }));
-        menuSearch.add(new JMenuItem(new AbstractAction("Country") {
-            public void actionPerformed(ActionEvent e) {
-                RestClient.restClient.pepSearch(RestClient.SearchType.COUNTRY, JOptionPane.showInputDialog("Search by country abbreviation:"));
-                // TODO
-            }
-        }));
-
         menuBar.add(menuSearch);
-
-        // File
-        // TODO
-        JMenu menuFile = new JMenu("File");
-        menuFile.add(new JMenuItem("Save"));
-        menuFile.add(new JMenuItem("Load"));
-        menuFile.add(new JMenuItem("Export"));
-        menuBar.add(menuFile);
-
-        // Edit
-        // TODO
-        JMenu menuEdit = new JMenu("Edit");
-        menuEdit.add(new JMenuItem("Add notes"));
-        menuBar.add(menuEdit);
-
-        // View
-        // TODO
-        JMenu menuView = new JMenu("View");
-        menuView.add(new JMenuItem("Resolution"));
-        menuBar.add(menuView);
 
         this.setJMenuBar(menuBar);
     }
