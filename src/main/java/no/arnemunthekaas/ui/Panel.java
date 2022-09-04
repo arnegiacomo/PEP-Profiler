@@ -75,7 +75,12 @@ public class Panel extends JPanel {
         this.profile = null;
         this.setLayout(new BorderLayout());
         createProfileTitle("PEP-Profiler", 0);
-        addTextArea("Test",BorderLayout.CENTER, Frame.getDefaultWidth() - 20);
+        addTextArea("""
+                This application performs checks for Politically Exposed People. Please try me out! NB. Requires an internet connection.
+                \s
+                This application was made as a submission to the STACC 2022 code challenge at https://github.com/stacc/stacc-code-challenge-public.
+                \s
+                Made by Arne Giacomo Munthe-Kaas at https://github.com/h593267.""",BorderLayout.CENTER, Frame.getDefaultWidth() - 20);
     }
 
     private void addProfileButton(Profile profile) {
