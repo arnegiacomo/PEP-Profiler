@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import no.arnemunthekaas.model.Profile;
 import no.arnemunthekaas.util.Config;
+import okio.Path;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -20,10 +21,11 @@ public class Serializer {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
         try {
-            FileWriter writer = new FileWriter(Config.savePath);
+            FileWriter writer = new FileWriter(new String(Paths.get(Serializer.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent() + "/" + Config.savePath));
+            //TODO FileWriter writer = new FileWriter(Config.savePath);
             writer.write(gson.toJson(Profile.cache));
             writer.close();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -34,16 +36,14 @@ public class Serializer {
         String inFile = null;
 
         try {
-            inFile = new String(Files.readAllBytes(Paths.get(Config.savePath)));
-        } catch (IOException e) {
+            inFile = new String(Files.readAllBytes(Paths.get(Paths.get(Serializer.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent() + "/" + Config.savePath)));
+            //TODO inFile = new String(Files.readAllBytes(Paths.get(Config.savePath)));
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         if(inFile != null) {
-            int maxGameObjectID = -1;
-            int maxComponentId = -1;
             Profile[] objs = gson.fromJson(inFile, Profile[].class);
-
             Profile.cache = new HashSet<>(Arrays.asList(objs));
         }
     }

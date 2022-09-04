@@ -3,7 +3,6 @@ plugins {
 }
 
 group 'no.arnemunthekaas'
-version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
@@ -33,4 +32,6 @@ jar {
     from {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
+
+    baseName 'PEP-Profiler'
 }

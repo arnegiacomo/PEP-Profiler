@@ -10,7 +10,32 @@ mulige treff. Deretter kan brukeren trykke på treffene og finne ut mer om perso
 være et verktøy som gjør PEP-sjekker mer informative og mer tilgjengelige/brukervennlige. 
 
 ## Hvordan kjøre prosjektet
-- Fylle ut senere
+```
+Kjøre som applikasjon (JDK 17.0.2):
+  (NB! Hvis man kjører denne på mac så må man kjøre gjennom Terminal)
+  1. Last ned Release 1.0 (til høyre), og pakk ut zip filen hvor som helst
+  2. Dobbeltklikk PEP-Profiler.jar og kos deg! 
+  - Alternativt kan den kjøres gjennom kommandolinje som java -jar "path til fil"/PEP-Profiler.jar
+    for feilmeldinger osv. 
+    
+Bygge jar selv (hvis man ikke klarer å kjøre, eller ønsker å bygge for annen JDK):
+  1. Clone prosjektet i din IDE "of choice". Jeg bruker IntelliJ IDEA.
+  2. Bygg Gradle Prosjektet
+  3. Kjør "Tasks/build/jar" (i Gradle tabben til høyre i IntelliJ)
+  4. Lag en ny mappe, der du ønsker å ha applikasjonen, og gi den et passende navn. 
+  5. Finn PEP-Profiler.jar (ligger generert i build/libs/PEP-Profiler.jar) og legg den inn i den nye mappen
+  6. Kopier cache-mappen fra prosjektet og legg den i den nye mappen (cache mappen bør inneholde cache.txt)
+  7. Dobbeltklikk på PEP-Profiler.jar og bruk applikasjonen som normalt
+
+Kjøre i IDE
+  1. Gjøre steg 1 og 2 i "Bygge har selv"
+  2. Gå til src/main/java/no.arnemunthekaas/service/serializer.java og kommenter ut linje 23 og 38
+     og fjern "//TODO" fra linje 24 og 39
+  3. Kjør Main som vanlig java-applikasjon
+```
+
+## Tutorial
+https://www.youtube.com/watch?v=SbQAdeB2miA&ab_channel=ArneMunthe-Kaas
 
 ## Kommentarer
 Maks resultater per API-spørring satt til 25, for effektivitetens skyld. I tillegg så fungerer applikasjonen definitivt best på personer med egne Wikipedia-sider på engelsk, gjerne med bilde. 
