@@ -6,14 +6,17 @@ https://github.com/stacc/stacc-code-challenge-public
 PEP-Profiler er en desktop basert Java-applikasjon som lar brukeren utføre [PEP](https://en.wikipedia.org/wiki/Politically_exposed_person)-sjekk gjennom [OpenSanctions](https://www.opensanctions.org/docs/api/)
 sitt API, og henter deretter relevant Wikipedia-info (bilde og "summary") om personen gjennom [OpenSearch](https://www.mediawiki.org/wiki/API:Opensearch)
 API-et. Applikasjonen benytter et GUI som lar brukeren søke etter nøkkelverdier som navn, nasjonalitet og mye mye mer, og blir deretter presentert med en liste med
-mulige treff. Deretter kan brukeren trykke på treffene og finne ut mer om personen de trykket på. Målet er at applikasjonen skal
-være et verktøy som gjør PEP-sjekker mer informative og mer tilgjengelige/brukervennlige. Maks resultater per API-spørring satt til 25, for effektivitetens skyld.
- I tillegg så fungerer applikasjonen definitivt best på personer med egne Wikipedia-sider på engelsk, gjerne med bilde.
+mulige treff. Deretter kan brukeren trykke på treffene og finne ut mer om personen de trykket på. I tillegg kan man lagre og laste inn PEP-profiler, disse lagres lokalt i en fil og kan lastes inn når som helst, eller fjernes fra cache om man ønsker det. Målet er at applikasjonen skal
+være et verktøy som gjør PEP-sjekker mer informative og mer tilgjengelige/brukervennlige. 
 
 ## Hvordan kjøre prosjektet
 - Fylle ut senere
 
 ## Kommentarer
+Maks resultater per API-spørring satt til 25, for effektivitetens skyld. I tillegg så fungerer applikasjonen definitivt best på personer med egne Wikipedia-sider på engelsk, gjerne med bilde. 
+For å forsikre at riktig Wikipedia info hentes, så må navnet på personen som søkes opp matche bokstavrett med tittelen på deres 
+Wikipedia side, dette er for å forhindre at feks. Kong Harald matches med Kong Harald Hårfagre sin Wikipeda. Dette kan føre til
+ at personer som trykkes på ikke får opp wiki info, men selve PEP-sjekken kan dog utføres som normalt.
 Jeg er noe misfornøyd med løsningen min, men jeg synes den har noe nyttig bruksområde. Om jeg hadde hatt mer tid så ville jeg
 nok laget en webapp... Men forsåvidt er jeg fornøyd med mengden funksjonalitet jeg fikk lagt inn på 3 dager. Prosjektet er noe
  rotete og dårlig planlagt, den fortjener en fin refaktorering, men per nå er mer en type "proof of concept". UI-var dessverre ikke et 

@@ -1,7 +1,9 @@
 package no.arnemunthekaas.ui;
 
 import no.arnemunthekaas.model.Pep;
+import no.arnemunthekaas.model.Profile;
 import no.arnemunthekaas.service.RestClient;
+import no.arnemunthekaas.service.Serializer;
 import org.apache.commons.text.WordUtils;
 
 import javax.swing.*;
@@ -18,7 +20,7 @@ public class Frame extends javax.swing.JFrame {
     private static final int defaultHeight = 720;
 
 
-    private JPanel jPanel;
+    private Panel jPanel;
     private JScrollPane jScrollPane;
     public Frame() {
         super("Pep-Profiler");
@@ -32,7 +34,7 @@ public class Frame extends javax.swing.JFrame {
         this.setResizable(false);
         centerFrame();
 
-        this.changePanel(new Panel(Panel.PanelType.HOME, null));
+        this.changePanel(new Panel(Panel.PanelType.HOME, null, null));
     }
 
     private void createMenuTab() {
@@ -40,22 +42,56 @@ public class Frame extends javax.swing.JFrame {
 
         menuBar.add(new JButton(new AbstractAction("Home") {
             public void actionPerformed(ActionEvent e) {
-                frame.changePanel(new Panel(Panel.PanelType.HOME, null));
+                frame.changePanel(new Panel(Panel.PanelType.HOME, null, null));
             }
         }));
 
         menuBar.add(new JButton(new AbstractAction("Search") {
             public void actionPerformed(ActionEvent e) {
                 List<Pep> peps = RestClient.restClient.pepSearch(RestClient.SearchType.NAME, WordUtils.capitalizeFully(JOptionPane.showInputDialog(null, "Search for PEP:", "Search", JOptionPane.PLAIN_MESSAGE)));
-                frame.changePanel(new Panel(Panel.PanelType.RESULTS, peps));
+                frame.changePanel(new Panel(Panel.PanelType.RESULTS, peps, null));
             }
         }));
 
         menuBar.add(new JButton(new AbstractAction("Save") {
             public void actionPerformed(ActionEvent e) {
-                // TODO
+                if(Frame.frame.jPanel.profile != null) {
+                    Profile.cache.add(Frame.frame.jPanel.profile);
+                    Serializer.saveProfiles();
+
+                    JOptionPane.showMessageDialog(null, "Profile successfully saved!", "Success", JOptionPane.PLAIN_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "PEP-Profile cannot be Saved. Reason: No currently selected PEP-profile, must be on a profile page.", "Error", JOptionPane.PLAIN_MESSAGE);
+                }
             }
         }));
+
+        menuBar.add(new JButton(new AbstractAction("Load") {
+            public void actionPerformed(ActionEvent e) {
+                Serializer.loadProfiles();
+                changePanel(new Panel(Panel.PanelType.LOADPANEL, null, null));
+            }
+        }));
+
+        menuBar.add(new JButton(new AbstractAction("Delete") {
+            public void actionPerformed(ActionEvent e) {
+                Serializer.loadProfiles();
+
+                if(Frame.frame.jPanel.profile != null) {
+                    if (Profile.cache.contains(Frame.frame.jPanel.profile)) {
+                        Profile.cache.remove(Frame.frame.jPanel.profile);
+                        Serializer.saveProfiles();
+                        changePanel(new Panel(Panel.PanelType.LOADPANEL, null, null));
+                        JOptionPane.showMessageDialog(null, "Profile successfully deleted from cache!", "Success", JOptionPane.PLAIN_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "PEP-Profile cannot be deleted. Reason: Was not saved.", "Error", JOptionPane.PLAIN_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "PEP-Profile cannot be deleted. Reason: Must be on a profile page.", "Error", JOptionPane.PLAIN_MESSAGE);
+                }
+            }
+        }));
+
 
         this.setJMenuBar(menuBar);
     }
@@ -85,9 +121,12 @@ public class Frame extends javax.swing.JFrame {
     }
 
     public void profilePanel(Pep pep) {
-        ArrayList<Pep> peps = new ArrayList<>();
-        peps.add(pep);
-        changePanel(new Panel(Panel.PanelType.PROFILEVIEW, peps));
+        Profile profile = new Profile(pep);
+        changePanel(new Panel(Panel.PanelType.PROFILEVIEW, null, profile));
+    }
+
+    public void loadProfilePanel(Profile profile) {
+        changePanel(new Panel(Panel.PanelType.PROFILEVIEW, null, profile));
     }
 
     private void centerFrame() {
@@ -101,4 +140,6 @@ public class Frame extends javax.swing.JFrame {
     public static int getDefaultHeight() {
         return defaultHeight;
     }
+
+
 }

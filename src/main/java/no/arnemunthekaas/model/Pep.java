@@ -133,4 +133,8 @@ public class Pep {
         if (first_seen != null)
             this.first_seen = first_seen;
     }
+
+    public String getId() {
+        return id;
+    }
 }

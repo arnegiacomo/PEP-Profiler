@@ -17,25 +17,41 @@ import java.util.List;
 
 public class Panel extends JPanel {
 
+    public Profile profile;
+
     public enum PanelType {
         HOME,
         RESULTS,
+        LOADPANEL,
         PROFILEVIEW
     }
 
-    public Panel(PanelType panelType, List<Pep> peps) {
+    public Panel(PanelType panelType, List<Pep> peps, Profile profile) {
         super();
 
         switch (panelType) {
             case HOME -> createHomePanel();
             case RESULTS -> createResultsPanel(peps);
-            case PROFILEVIEW -> createProfileViewPanel(peps.get(0));
+            case PROFILEVIEW -> createProfileViewPanel(profile);
+            case LOADPANEL -> createLoadPanel();
         }
     }
 
-    private void createProfileViewPanel(Pep pep) {
+    private void createLoadPanel() {
+        this.profile = null;
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        if(Profile.cache.size() == 0) {
+            this.addTextArea("No profiles saved", BorderLayout.CENTER, Frame.frame.getWidth());
+            return;
+        }
+
+        Profile.cache.forEach(this::addProfileButton);
+    }
+
+    private void createProfileViewPanel(Profile profile) {
         this.setLayout(new BorderLayout());
-        Profile profile = new Profile(pep);
+        this.profile = profile;
         createProfileTitle(profile.getName(), 2);
         addTextArea(profile.getPep().toSexyPepString(), BorderLayout.WEST, 250);
         addTextArea(profile.getDescription(), BorderLayout.CENTER, 600);
@@ -43,6 +59,7 @@ public class Panel extends JPanel {
     }
 
     private void createResultsPanel(List<Pep> peps) {
+        this.profile = null;
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         if(peps == null) peps = new ArrayList<>();
@@ -55,9 +72,22 @@ public class Panel extends JPanel {
     }
 
     private void createHomePanel() {
+        this.profile = null;
         this.setLayout(new BorderLayout());
         createProfileTitle("PEP-Profiler", 0);
         addTextArea("Test",BorderLayout.CENTER, Frame.getDefaultWidth() - 20);
+    }
+
+    private void addProfileButton(Profile profile) {
+        JButton button = new JButton (new AbstractAction(profile.getPep().toSexyButtonString()) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Frame.frame.loadProfilePanel(profile);
+            }
+        });
+        button.setHorizontalAlignment(SwingConstants.LEFT);
+        button.setMaximumSize(new Dimension(Frame.getDefaultWidth() - 20, 150));
+        this.add (button);
     }
 
     private void addResultButton(Pep pep) {

@@ -9,4 +9,5 @@ public class Config {
     public static String wikiSummaryPath = "https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=";
     public static String wikiImagePath = "http://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&piprop=original&titles=";
 
+    public static String savePath = "cache/cache.txt";
 }
