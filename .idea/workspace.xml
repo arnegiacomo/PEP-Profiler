@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="71bf3a03-a0af-475f-a6c0-653445970da8" name="Changes" comment="Data serialization + fun buttons to click">
+    <list default="true" id="71bf3a03-a0af-475f-a6c0-653445970da8" name="Changes" comment="Finished">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/no/arnemunthekaas/service/Serializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/no/arnemunthekaas/service/Serializer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -221,7 +218,7 @@
       <workItem from="1662152837831" duration="16202000" />
       <workItem from="1662282183584" duration="3117000" />
       <workItem from="1662285681598" duration="44000" />
-      <workItem from="1662285838722" duration="5942000" />
+      <workItem from="1662285838722" duration="7215000" />
     </task>
     <task id="LOCAL-00001" summary=".">
       <created>1661715708014</created>
@@ -314,7 +311,14 @@
       <option name="project" value="LOCAL" />
       <updated>1662284801269</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Finished">
+      <created>1662291954602</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1662291954602</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -341,6 +345,7 @@
     <MESSAGE value="see pep info even tho cant find wiki page" />
     <MESSAGE value="almost finished, small polish stuff left" />
     <MESSAGE value="Data serialization + fun buttons to click" />
-    <option name="LAST_COMMIT_MESSAGE" value="Data serialization + fun buttons to click" />
+    <MESSAGE value="Finished" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished" />
   </component>
 </project>

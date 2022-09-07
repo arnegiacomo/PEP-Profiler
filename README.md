@@ -1,7 +1,7 @@
-# Stacc code challenge 2022
+# Stacc code challenge 2022 - Edit: Winner!!!
 https://github.com/stacc/stacc-code-challenge-public
 
-
+2022.9.7 21:20 - Jeg vant challengen og en iPhone 13! Veldig kult! :-)
 ## Oppgavebeskrivelse
 PEP-Profiler er en desktop basert Java-applikasjon som lar brukeren utføre [PEP](https://en.wikipedia.org/wiki/Politically_exposed_person)-sjekk gjennom [OpenSanctions](https://www.opensanctions.org/docs/api/)
 sitt API, og henter deretter relevant Wikipedia-info (bilde og "summary") om personen gjennom [OpenSearch](https://www.mediawiki.org/wiki/API:Opensearch)
