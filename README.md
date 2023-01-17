@@ -28,7 +28,7 @@ Bygge jar selv (hvis man ikke klarer å kjøre, eller ønsker å bygge for annen
   7. Dobbeltklikk på PEP-Profiler.jar og bruk applikasjonen som normalt
 
 Kjøre i IDE
-  1. Gjøre steg 1 og 2 i "Bygge har selv"
+  1. Gjøre steg 1 og 2 i "Bygge jar selv"
   2. Gå til src/main/java/no.arnemunthekaas/service/serializer.java og kommenter ut linje 23 og 38
      og fjern "//TODO" fra linje 24 og 39
   3. Kjør Main som vanlig java-applikasjon
